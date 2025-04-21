@@ -31,50 +31,50 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 # INSTALLED APPS
 # ─────────────────────────────────────
 INSTALLED_APPS = [
-    # Django apps
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+# Django apps
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
 
-    # Terceros
-    'corsheaders',
-    'rest_framework',
-    'django_filters',
+# Terceros
+'corsheaders',
+'rest_framework',
+'django_filters',
     'whitenoise.runserver_nostatic', # Agregamos whitenoise para servir estáticos en producción
     'whitenoise',
 
-    # Apps propias
-    'apps.auth_app',
-    'apps.usuarios',
-    'apps.productos',
-    'apps.ventas',
-    'apps.reportes',
-    'apps.contabilidad',
-    'apps.crm',
-    'apps.voz',
-    'apps.categoria',
-    'apps.pagos',
-    'apps.recomendaciones',
-    'apps.notificaciones',
-    'apps.carrito',
+# Apps propias
+'apps.auth_app',
+'apps.usuarios',
+'apps.productos',
+'apps.ventas',
+'apps.reportes',
+'apps.contabilidad',
+'apps.crm',
+'apps.voz',
+'apps.categoria',
+'apps.pagos',
+'apps.recomendaciones',
+'apps.notificaciones',
+'apps.carrito',
 ]
 
 # ─────────────────────────────────────
 # MIDDLEWARE
 # ─────────────────────────────────────
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # ← Importante que esté primero
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Agregamos whitenoise middleware justo después de SecurityMiddleware
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware', # Asegúrate de tener este si necesitas protección CSRF
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+'corsheaders.middleware.CorsMiddleware',
+'django.middleware.security.SecurityMiddleware',
+'whitenoise.middleware.WhiteNoiseMiddleware', # Agregamos whitenoise middleware justo después de SecurityMiddleware
+'django.contrib.sessions.middleware.SessionMiddleware',
+'django.middleware.common.CommonMiddleware',
+'django.middleware.csrf.CsrfViewMiddleware', # Asegúrate de tener este si necesitas protección CSRF
+'django.contrib.auth.middleware.AuthenticationMiddleware',
+'django.contrib.messages.middleware.MessageMiddleware',
+'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 # ─────────────────────────────────────
@@ -83,18 +83,17 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
+{
+'BACKEND': 'django.template.backends.django.DjangoTemplates',
+'DIRS': [],
+'APP_DIRS': True,
+'OPTIONS': {
+'context_processors': [
+'django.contrib.auth.context_processors.auth',
+'django.contrib.messages.context_processors.messages',
+],
+},
+},
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -104,7 +103,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # ─────────────────────────────────────
 # Configuración para PostgreSQL usando dj_database_url y la variable de entorno DATABASE_URL de Render
 DATABASES = {
-    'default': dj_database_url.config(
+'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL'),
         conn_max_age=600 # Opcional: Configura la edad máxima de conexión en segundos
     )
@@ -117,17 +116,17 @@ DATABASES = {
 AUTH_USER_MODEL = 'usuarios.User'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+'django.contrib.auth.backends.ModelBackend',
 ]
 
 # ─────────────────────────────────────
 # PASSWORD VALIDATION
 # ─────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+{'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+{'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+{'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+{'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # ─────────────────────────────────────
@@ -160,20 +159,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # REST FRAMEWORK
 # ─────────────────────────────────────
 REST_FRAMEWORK = {
-    # Sólo JWTAuthentication (no SessionAuthentication → no chequeo CSRF)
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
-    'DEFAULT_PAGINATION_CLASS': None,
-    'PAGE_SIZE': None,
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter',
-    ],
+# Sólo JWTAuthentication (no SessionAuthentication → no chequeo CSRF)
+'DEFAULT_AUTHENTICATION_CLASSES': (
+'rest_framework_simplejwt.authentication.JWTAuthentication',
+),
+'DEFAULT_PERMISSION_CLASSES': (
+'rest_framework.permissions.AllowAny',
+),
+'DEFAULT_PAGINATION_CLASS': None,
+'PAGE_SIZE': None,
+'DEFAULT_FILTER_BACKENDS': [
+'django_filters.rest_framework.DjangoFilterBackend',
+'rest_framework.filters.SearchFilter',
+'rest_framework.filters.OrderingFilter',
+],
 }
 
 # ─────────────────────────────────────
@@ -186,33 +185,33 @@ CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOW_ALL_ORIGINS = not DEBUG # Permite todos los orígenes si DEBUG es False
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5174",
+"http://localhost:5173",
+"http://localhost:5174",
     # Agrega aquí la URL de tu frontend en producción cuando la tengas
     # os.environ.get('FRONTEND_URL_RENDER'), # Ejemplo si la guardas en una variable de entorno
 ]
 
 CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
+"DELETE",
+"GET",
+"OPTIONS",
+"PATCH",
+"POST",
+"PUT",
 ]
 CORS_ALLOW_HEADERS = list(default_headers) + [
-    'X-CSRFToken',
-    'Authorization',
-    'Content-Type',
+'X-CSRFToken',
+'Authorization',
+'Content-Type',
 ]
 
 # CSRF_TRUSTED_ORIGINS: También considera usar variables de entorno en producción
 # CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost:5173,http://localhost:5174').split(',')
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5174",
-     # Agrega aquí la URL de tu frontend en producción cuando la tengas
-    # os.environ.get('FRONTEND_URL_RENDER'), # Ejemplo si la guardas en una variable de entorno
+"http://localhost:5173",
+"http://localhost:5174",
+# Agrega aquí la URL de tu frontend en producción cuando la tengas
+# os.environ.get('FRONTEND_URL_RENDER'), # Ejemplo si la guardas en una variable de entorno
 ]
 
 
@@ -228,9 +227,9 @@ STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET", "")
 # SIMPLE JWT
 # ─────────────────────────────────────
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_HEADER_TYPES': ('Bearer',),
+'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+'AUTH_HEADER_TYPES': ('Bearer',),
     # Considera usar un signing key diferente para producción guardado en variables de entorno
     # 'SIGNING_KEY': os.environ.get('SIMPLE_JWT_SIGNING_KEY', settings.SECRET_KEY),
 }
