@@ -1,4 +1,6 @@
 import os
+import dj_database_url
+
 from pathlib import Path
 from datetime import timedelta
 from corsheaders.defaults import default_headers
@@ -8,9 +10,11 @@ from corsheaders.defaults import default_headers
 # ─────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-i&@!wo*^e7ioyuf#^ei^lix&u2+dh(_qs2s*t&1wxw3d^8^woi'
-DEBUG = True
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-i&@!wo*^e7ioyuf#^ei^lix&u2+dh(_qs2s*t&1wxw3d^8^woi')
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['.onrender.com']
+if 'RENDER' in os.environ:
+    ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
 
 # ─────────────────────────────────────
 # INSTALLED APPS
@@ -83,17 +87,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # ─────────────────────────────────────
 # DATABASE
 # ─────────────────────────────────────
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ventas',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+import os
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
 # ─────────────────────────────────────
 # AUTH
 # ─────────────────────────────────────

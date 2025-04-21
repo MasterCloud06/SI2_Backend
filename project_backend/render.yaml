@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: django-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn myproject.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://myuser:LWbDttFoc1HgnREgsmYMEXJjivRsPLNl@dpg-d02pvd6uk2gs73enridg-a/venta_wr7g
